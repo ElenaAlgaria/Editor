@@ -288,7 +288,7 @@ public class DrawModelTest {
 			public void draw(Graphics g) { }
 			@Override
 			public void move(int dx, int dy) {
-				listener.figureChanged(new FigureEvent(this));
+				listener.notifyObservers(new FigureEvent(this));
 			}
 			@Override
 			public boolean contains(int x, int y) { return false; }

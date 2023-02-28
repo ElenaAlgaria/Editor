@@ -9,9 +9,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 
 import jdraw.framework.Figure;
+import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
 
@@ -21,8 +23,12 @@ import jdraw.framework.FigureListener;
  * @author Christoph Denzler
  *
  */
+// Figure = Subjekt
 public class Rect implements Figure {
-	private static final long serialVersionUID = 9120181044386552132L;
+	private static final long seriralVersionUID = 9120181044386552132L;
+	// Listener = Observer, gegen ein interface programmiert List isch es interface
+	private List<FigureListener> listeners;
+
 
 	/**
 	 * Use the java.awt.Rectangle in order to save/reuse code.
@@ -39,6 +45,7 @@ public class Rect implements Figure {
 	 */
 	public Rect(int x, int y, int w, int h) {
 		rectangle = new Rectangle(x, y, w, h);
+		listeners = new ArrayList<>();
 	}
 
 	/**
@@ -54,16 +61,18 @@ public class Rect implements Figure {
 		g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 	}
 
+	// notify für änderige, alli beobachter informieren
 	@Override
 	public void setBounds(Point origin, Point corner) {
 		rectangle.setFrameFromDiagonal(origin, corner);
-		// TODO notification of change
+		notifyFigureList();
 	}
 
+	// notify für änderige, alli beobachter informieren
 	@Override
 	public void move(int dx, int dy) {
 		rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
-		// TODO notification of change
+		notifyFigureList();
 	}
 
 	@Override
@@ -87,19 +96,29 @@ public class Rect implements Figure {
 		return null;
 	}
 
+	// listener hinzuefüege zu de observer liste
 	@Override
 	public void addFigureListener(FigureListener listener) {
-		// TODO Auto-generated method stub
+		listeners.add(listener);
 	}
 
 	@Override
 	public void removeFigureListener(FigureListener listener) {
-		// TODO Auto-generated method stub
+		listeners.remove(listener);
 	}
 
 	@Override
 	public Figure clone() {
 		return null;
 	}
+
+	// private wills sowieso nur do inne brucht wird
+	// figure observer und changed = update
+	private void notifyFigureList(){
+		for (FigureListener listener: listeners){
+			listener.notifyObservers(new FigureEvent(this));
+		}
+	}
+
 
 }

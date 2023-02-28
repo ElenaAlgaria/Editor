@@ -81,17 +81,17 @@ public final class StdDrawView extends JComponent implements DrawView {
 			if (e.getType() == DrawModelEvent.Type.DRAWING_CLEARED) {
 				clearSelection();
 			}
-
+//
 // If a figure was added or removed, we could restrict the area to be repainted, but the
 // problem is that this area is not known as long as the size of the handles is not known.
-//				if(e.getType() == DrawModelEvent.Type.FIGURE_ADDED
-//				 || e.getType() == DrawModelEvent.Type.FIGURE_REMOVED
-//				) {
-//					// here the bounds of all the handles has to be added to e.getFigure().getBounds()
-//					repaint(e.getFigure().getBounds());
-//				} else {
-//					repaint();
-//				}
+				if(e.getType() == DrawModelEvent.Type.FIGURE_ADDED
+				 || e.getType() == DrawModelEvent.Type.FIGURE_REMOVED
+				) {
+					// here the bounds of all the handles has to be added to e.getFigure().getBounds()
+					repaint(e.getFigure().getBounds());
+				} else {
+					repaint();
+				}
 			repaint();
 		};
 
@@ -162,8 +162,8 @@ public final class StdDrawView extends JComponent implements DrawView {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		// g.setColor(getBackground());
-		// g.fillRect(0, 0, getWidth(), getHeight());
+		 g.setColor(getBackground());
+		 g.fillRect(0, 0, getWidth(), getHeight());
 		model.getFigures().forEachOrdered(f -> f.draw(g));
 		handles.forEach(fh -> fh.draw(g));
 

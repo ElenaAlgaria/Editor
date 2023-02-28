@@ -35,11 +35,11 @@ public class RectangleTest {
 		FigureListener l = mock(FigureListener.class);
 		f.addFigureListener(l);
 		f.move(1, 1);
-		verify(l, times(1).description("figureChanged must be called on a registered listener")).figureChanged(any());
+		verify(l, times(1).description("figureChanged must be called on a registered listener")).notifyObservers(any());
 
 		f.removeFigureListener(l);
 		f.move(2, 2);
-		verify(l, times(1).description("figureChanged must not be called on disconnected listener")).figureChanged(any());
+		verify(l, times(1).description("figureChanged must not be called on disconnected listener")).notifyObservers(any());
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class RectangleTest {
 		f.move(0, 0);
 
 		verify(l, never().description("figureChanged must not be called if the state did not change"))
-				.figureChanged(any());
+				.notifyObservers(any());
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class RectangleTest {
 		f.move(1, 1);
 
 		ArgumentCaptor<FigureEvent> event = ArgumentCaptor.forClass(FigureEvent.class);
-		verify(l, times(1).description("figureChanged must be called on a registered listener")).figureChanged(event.capture());
+		verify(l, times(1).description("figureChanged must be called on a registered listener")).notifyObservers(event.capture());
 		assertSame(f, event.getValue().getFigure(), "getFigure must return the figure which was changed");
 	}
 
@@ -73,8 +73,8 @@ public class RectangleTest {
 		f.addFigureListener(l2);
 		f.move(3, 3);
 
-		verify(l1, times(1).description("multiple listeners are not supported")).figureChanged(any());
-		verify(l2, times(1).description("multiple listeners are not supported")).figureChanged(any());
+		verify(l1, times(1).description("multiple listeners are not supported")).notifyObservers(any());
+		verify(l2, times(1).description("multiple listeners are not supported")).notifyObservers(any());
 	}
 
 	@Test
@@ -84,11 +84,11 @@ public class RectangleTest {
 		f.addFigureListener(l);
 		f.addFigureListener(l);
 		f.move(3, 3);
-		verify(l, times(1).description("set semantics of addFigureListener violated")).figureChanged(any());
+		verify(l, times(1).description("set semantics of addFigureListener violated")).notifyObservers(any());
 		f.removeFigureListener(l);
 		f.removeFigureListener(l);
 		f.move(3, 3);
-		verify(l, times(1).description("set semantics of addFigureListener violated")).figureChanged(any());
+		verify(l, times(1).description("set semantics of addFigureListener violated")).notifyObservers(any());
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class RectangleTest {
 			e.getFigure().removeFigureListener(removeListener);
 			return null;
 		};
-		doAnswer(removeFigureChanged).when(removeListener).figureChanged(any());
+		doAnswer(removeFigureChanged).when(removeListener).notifyObservers(any());
 
 		f.addFigureListener(mock(FigureListener.class));
 		f.addFigureListener(removeListener);
@@ -142,7 +142,7 @@ public class RectangleTest {
 		}
 
 		@Override
-		public void figureChanged(FigureEvent e) {
+		public void notifyObservers(FigureEvent e) {
 			Point p1 = e.getFigure().getBounds().getLocation();
 			Point p2 = f.getBounds().getLocation();
 			f.move(p1.x - p2.x, p1.y - p2.y);

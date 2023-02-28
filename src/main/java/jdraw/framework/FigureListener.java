@@ -21,5 +21,5 @@ public interface FigureListener {
 	 * 
 	 * @param e figure event
 	 */
-	void figureChanged(FigureEvent e);
+	void notifyObservers(FigureEvent e);
 }
