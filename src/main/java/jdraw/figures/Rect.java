@@ -71,8 +71,10 @@ public class Rect implements Figure {
 	// notify für änderige, alli beobachter informieren
 	@Override
 	public void move(int dx, int dy) {
+		if (dx != 0 || dy != 0){
 		rectangle.setLocation(rectangle.x + dx, rectangle.y + dy);
 		notifyFigureList();
+		}
 	}
 
 	@Override
@@ -116,7 +118,9 @@ public class Rect implements Figure {
 	// figure observer und changed = update
 	private void notifyFigureList(){
 		for (FigureListener listener: listeners){
+			if (listener != null){
 			listener.notifyObservers(new FigureEvent(this));
+			}
 		}
 	}
 

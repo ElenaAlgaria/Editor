@@ -39,6 +39,7 @@ public class StdDrawModel implements DrawModel, FigureListener {
 
     @Override
     public void addFigure(Figure f) {
+        if (f != null && !figures.contains(f)){
         // rolle vo subjekt
         figures.add(f);
         // demit mer mitbekummt was mit figure passiert und this ish en figurelistener will
@@ -46,6 +47,7 @@ public class StdDrawModel implements DrawModel, FigureListener {
         f.addFigureListener(this);
         // jetzt wieder subjekt mir informieret s view drübert
         notifyObservers(f, DrawModelEvent.Type.FIGURE_ADDED);
+        }
         System.out.println("StdDrawModel.addFigure");
     }
 
@@ -59,12 +61,13 @@ public class StdDrawModel implements DrawModel, FigureListener {
 
     @Override
     public void removeFigure(Figure f) {
-        // subjekt task
-        figures.remove(f);
+        // subjekt task, hett boolean dinne im remove wenn true de i liste dinne und removed
+        if (figures.remove(f)){
         // observer
         f.removeFigureListener(this);
         // subjekt
         notifyObservers(f, DrawModelEvent.Type.FIGURE_REMOVED);
+        }
         System.out.println("StdDrawModel.removeFigure");
     }
 
@@ -101,12 +104,20 @@ public class StdDrawModel implements DrawModel, FigureListener {
     // index neh f dert uselösche us liste und de neu index innetue mit de f
     @Override
     public void setFigureIndex(Figure f, int index) {
+        // stoht im drawmodel dinne, Precoditions
+        if (!figures.contains(f)){
+            throw new IllegalArgumentException();
+        }
+        if (index < 0 || index >= figures.size()){
+            throw new IndexOutOfBoundsException();
+        }
+
         int currentIndex = figures.indexOf(f);
         if (currentIndex != index){
             figures.remove(currentIndex);
             figures.add(index, f);
             // änderig = alli informiere
-            notifyObservers(f, DrawModelEvent.Type.FIGURE_CHANGED);
+            notifyObservers(f, DrawModelEvent.Type.DRAWING_CHANGED);
         }
         System.out.println("StdDrawModel.setFigureIndex");
     }
