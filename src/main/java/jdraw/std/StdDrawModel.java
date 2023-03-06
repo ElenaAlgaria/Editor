@@ -39,7 +39,7 @@ public class StdDrawModel implements DrawModel, FigureListener {
 
     @Override
     public void addFigure(Figure f) {
-        if (f != null && !figures.contains(f)){
+        if (f != null && !figures.contains(f) ){
         // rolle vo subjekt
         figures.add(f);
         // demit mer mitbekummt was mit figure passiert und this ish en figurelistener will
@@ -54,6 +54,9 @@ public class StdDrawModel implements DrawModel, FigureListener {
 
     @Override
     public Stream<Figure> getFigures() {
+        if (figures == null){
+            throw new NullPointerException();
+        }
         System.out.println("StdDrawModel.getFigures");
         // mit .stream de stream becho vo de collection
         return figures.stream();
