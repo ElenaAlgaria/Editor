@@ -24,15 +24,15 @@ import java.awt.event.MouseEvent;
  *
  * @author Christoph Denzler
  */
-public final class OvalTool extends AbstractTool {
+public class LineTool extends AbstractTool {
 
-	public OvalTool(DrawContext context) {
-		super(context, "Oval", "oval.png");
+	public LineTool(DrawContext context) {
+	super(context, "Line", "line.png");
 	}
 
 	@Override
 	protected Figure createFigureAt(int x, int y) {
-		return new Oval(x, y, 0, 0);
+		return new Line(x,y);
 	}
 
 }

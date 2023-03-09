@@ -27,6 +27,8 @@ import jdraw.framework.FigureListener;
  */
 // drawModel = Subjekt, FigureListener = Observer
 public class StdDrawModel implements DrawModel, FigureListener {
+   // 4) ob model für beobachter immer konsistent isch, veränderet sich d liste de werdet beobachter benachrichtigt und
+   // nur wenns vollständig gmacht wurde isch aso d veränderig ned in between 50 mal benachrichtige
     private List<Figure> figures;
     // liste vo observers vom view
     private List<DrawModelListener> drawModelListeners;
@@ -37,6 +39,7 @@ public class StdDrawModel implements DrawModel, FigureListener {
         drawModelListeners = new ArrayList<>();
     }
 
+    // 5) figurelistener notifiziert nur observer vo sich selbst gut so
     @Override
     public void addFigure(Figure f) {
         if (f != null && !figures.contains(f) ){
@@ -62,6 +65,7 @@ public class StdDrawModel implements DrawModel, FigureListener {
         return figures.stream();
     }
 
+    // bruchts fürs 2) GC demit de lauft gleert wird
     @Override
     public void removeFigure(Figure f) {
         // subjekt task, hett boolean dinne im remove wenn true de i liste dinne und removed

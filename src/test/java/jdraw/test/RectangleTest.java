@@ -27,7 +27,7 @@ public class RectangleTest {
 
 	@BeforeEach
 	public void setUp() {
-		f = new Rect(1, 1, 20, 10);
+		f = new Rect(1, 1);
 	}
 
 	@Test
@@ -117,7 +117,7 @@ public class RectangleTest {
 	@Test
 	final public void testCycle() {
 		Figure f1 = f;
-		Figure f2 = new Rect(10, 10, 10, 10);
+		Figure f2 = new Rect(10, 10);
 		f1.addFigureListener(new UpdateListener(f2));
 		f2.addFigureListener(new UpdateListener(f1));
 
