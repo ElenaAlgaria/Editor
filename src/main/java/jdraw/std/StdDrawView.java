@@ -69,7 +69,9 @@ public final class StdDrawView extends JComponent implements DrawView {
 	public StdDrawView(DrawModel model) {
 
 		this.model = model;
-
+// 5) kausalität von änderungen, änderung auf model vollständig ann alle wiitergeh werde chan, erst de die nächste änderung
+		// wiitergeh, werdem update kei veränderige uslöse vom beobachter us will süscht die andere listener abkratzet
+		// euse listener keine schriebt ufs model do
 		ml = e -> {
 			Dimension size = getPreferredSize();
 			setPreferredSize(size);
@@ -104,6 +106,7 @@ public final class StdDrawView extends JComponent implements DrawView {
 		addKeyListener(ieh);
 	}
 
+	// 2 ressource beim schliessen abmelde
 	@Override
 	public void close() {
 		model.removeModelChangeListener(ml);

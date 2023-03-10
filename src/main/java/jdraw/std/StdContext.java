@@ -16,6 +16,8 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import jdraw.figures.LineTool;
+import jdraw.figures.OvalTool;
 import jdraw.figures.RectTool;
 import jdraw.framework.DrawCommandHandler;
 import jdraw.framework.DrawModel;
@@ -158,21 +160,19 @@ public class StdContext extends AbstractContext {
 		fileMenu.add(exit);
 		exit.addActionListener(e -> System.exit(0));
 
-		JMenuItem hello = new JMenuItem("Hello");
-		fileMenu.add(hello);
-		hello.addActionListener(e -> System.out.println("Hello"));
-
 		return fileMenu;
 	}
 
-	// add tools here
 	@Override
 	protected void doRegisterDrawTools() {
-		DrawTool rectangleTool1 = new RectTool(this);
-		DrawTool rectangleTool2 = new RectTool(this);
-		addTool(rectangleTool1);
-		addTool(rectangleTool2);
+		DrawTool rectangleTool = new RectTool(this);
+		addTool(rectangleTool);
+		// TODO Add new figure tools here
+		DrawTool ovalTool = new OvalTool(this);
+		addTool(ovalTool);
 
+		DrawTool lineTool = new LineTool(this);
+		addTool(lineTool);
 	}
 
 	/**
