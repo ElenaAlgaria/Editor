@@ -8,7 +8,16 @@ package jdraw.figures;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.List;
 
+import jdraw.figures.handles.Handle;
+import jdraw.figures.handles.NWState;
+import jdraw.figures.handles.SEState;
+import jdraw.figures.handles.SWState;
+import jdraw.figures.handles.WState;
+import jdraw.framework.Figure;
+import jdraw.framework.FigureHandle;
+import jdraw.framework.HandleState;
 import jdraw.std.AbstractRectangularFigure;
 
 /**
@@ -20,6 +29,7 @@ import jdraw.std.AbstractRectangularFigure;
 // Figure = Subjekt
 public class Rect extends AbstractRectangularFigure {
 	private static final long seriralVersionUID = 9120181044386552132L;
+
 
 	// für tests
 	public Rect(int x, int y, int width, int height) {
@@ -49,5 +59,6 @@ public class Rect extends AbstractRectangularFigure {
 		g.setColor(Color.BLACK);
 		g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 	}
+
 
 }

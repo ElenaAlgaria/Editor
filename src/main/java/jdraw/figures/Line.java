@@ -5,11 +5,19 @@
 
 package jdraw.figures;
 
+import jdraw.figures.handles.Handle;
+import jdraw.figures.handles.NEState;
+import jdraw.figures.handles.NWState;
+import jdraw.figures.handles.SEState;
+import jdraw.figures.handles.SWState;
+import jdraw.framework.FigureHandle;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
+import java.util.List;
 
 /**
  * Represents rectangles in JDraw.
@@ -19,7 +27,7 @@ import java.awt.geom.Line2D;
 // Figure = Subjekt
 public class Line extends AbstractFigure {
     private static final long seriralVersionUID = 9120181044386552132L;
-
+    private List<FigureHandle> handles = null;
 
     /**
      * Use the java.awt.Rectangle in order to save/reuse code.
@@ -77,6 +85,39 @@ public class Line extends AbstractFigure {
     @Override
     public Rectangle getBounds() {
         return line.getBounds();
+    }
+
+    @Override
+    public void swapVertical(){
+        for (FigureHandle f :  handles){
+            Handle h = (Handle) f;
+            h.setState(h.getState().swapVertical());
+        }
+    }
+
+    @Override
+    public void swapHorizontal(){
+        for (FigureHandle f :  handles){
+            Handle h = (Handle) f;
+            h.setState(h.getState().swapHorizontal());
+        }
+    }
+
+    @Override
+    public List<FigureHandle> getHandles(){
+        Point start = new Point((int) line.getX1(), (int) line.getY1());
+        Point end = new Point((int) line.getX2(), (int) line.getY2());
+        if (handles == null){
+            if ((end.x - start.x) * (end.y - start.y) > 0){
+                handles = List.of(new Handle(new NWState(this)),
+                    new Handle(new SEState(this)));
+
+            }else {
+                handles = List.of(new Handle(new NEState(this)),
+                    new Handle(new SWState(this)));
+            }
+        }
+     return handles;
     }
 
 

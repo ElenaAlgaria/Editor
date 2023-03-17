@@ -1,9 +1,12 @@
 package jdraw.figures;
 
+import jdraw.figures.handles.NEState;
+import jdraw.figures.handles.SWState;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
+import jdraw.framework.HandleState;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -11,7 +14,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public abstract class  AbstractFigure implements Figure {
     //add/remove unabhängig von der notifikation
     private final List<FigureListener> listeners = new CopyOnWriteArrayList<>();
-
 
     // listener hinzuefüege zu de observer liste
     @Override
@@ -50,5 +52,11 @@ public abstract class  AbstractFigure implements Figure {
             }
         }
     }
+
+
+    public  void  swapVertical() {}
+    public void  swapHorizontal(){}
+
+
 
 }

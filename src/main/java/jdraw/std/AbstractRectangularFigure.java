@@ -1,13 +1,39 @@
 package jdraw.std;
 
 import jdraw.figures.AbstractFigure;
+import jdraw.figures.handles.EState;
+import jdraw.figures.handles.Handle;
+import jdraw.figures.handles.NEState;
+import jdraw.figures.handles.NState;
+import jdraw.figures.handles.NWState;
+import jdraw.figures.handles.SEState;
+import jdraw.figures.handles.SState;
+import jdraw.figures.handles.SWState;
+import jdraw.figures.handles.WState;
+import jdraw.framework.Figure;
+import jdraw.framework.FigureHandle;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.List;
 
 public abstract class AbstractRectangularFigure extends AbstractFigure {
     // wird nur do inne brucht nachem new nümme ändere darum final und private
     private final Rectangle rectangle;
+
+    // initial state für diese handle
+    private final Handle nw = new Handle(new NWState(this));
+    private final Handle sw = new Handle(new SWState(this));
+    private final Handle se = new Handle(new SEState(this));
+    private final Handle ne = new Handle(new NEState(this));
+    private final Handle w  = new Handle(new WState(this));
+    private final Handle e = new Handle(new EState(this));
+    private final Handle n = new Handle(new NState(this));
+    private final Handle s = new Handle(new SState(this));
+
+
+    private final List<FigureHandle> handles = List.of(nw, ne, sw, se,n, s, w, e);
+
 
     protected AbstractRectangularFigure(int x, int y) {
         this.rectangle = new Rectangle(x, y, 0, 0);
@@ -42,4 +68,32 @@ public abstract class AbstractRectangularFigure extends AbstractFigure {
         return rectangle.contains(x, y);
     }
 
+
+    /**
+     * Returns a list of 8 handles for this Rectangle.
+     *
+     * @return all handles that are attached to the targeted figure.
+     * @see Figure#getHandles()
+     */
+    @Override
+    public List<FigureHandle> getHandles() {
+        return handles;
+    }
+
+    // setzten neue state wenns nötig ish, checket alli handles, gebet mir fh
+    @Override
+    public void swapVertical() {
+        for (FigureHandle figureHandle : handles){
+        Handle h = (Handle) figureHandle; // wegen setState get
+        h.setState(h.getState().swapVertical());
+        }
+    }
+
+    @Override
+    public void swapHorizontal() {
+        for (FigureHandle figureHandle : handles){
+            Handle h = (Handle) figureHandle; // wegen setState get
+            h.setState(h.getState().swapHorizontal());
+        }
+    }
 }
