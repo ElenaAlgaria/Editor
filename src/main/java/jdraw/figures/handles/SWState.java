@@ -46,14 +46,15 @@ public class SWState implements HandleState {
     @Override
     public void dragInteraction(int x, int y, MouseEvent e, DrawView v) {
         var bounds = owner.getBounds();
-        owner.setBounds(new Point(x,y),
-            new Point(bounds.x + bounds.width, bounds.y));
+        if (y < bounds.y){
+            owner.swapVertical();
+        }
         if (x > bounds.x + bounds.width){
             owner.swapHorizontal();
         }
-        if (y > bounds.y){
-            owner.swapHorizontal();
-        }
+
+        owner.setBounds(new Point(x,y),
+            new Point(bounds.x + bounds.width, bounds.y));
     }
 
 

@@ -30,11 +30,15 @@ public class NState implements HandleState {
     @Override
     public void dragInteraction(int x, int y,MouseEvent e, DrawView v) {
         var bounds = owner.getBounds();
-        owner.setBounds(new Point(bounds.x, y),
-            new Point(bounds.x + bounds.width, bounds.y + bounds.height));
-        if (y > bounds.height){
+        if (y > bounds.height + bounds.y) {
             owner.swapVertical();
         }
+
+        if (x > bounds.x + bounds.width){
+            owner.swapHorizontal();
+        }
+        owner.setBounds(new Point(bounds.x, y),
+            new Point(bounds.x + bounds.width, bounds.y + bounds.height));
     }
 
     @Override

@@ -45,14 +45,14 @@ public class SEState implements HandleState {
     @Override
     public void dragInteraction(int x, int y, MouseEvent e, DrawView v) {
         var bounds = owner.getBounds();
+        if (x < bounds.x) {
+            owner.swapHorizontal();
+        }
+        if (y < bounds.y) {
+            owner.swapVertical();
+        }
         owner.setBounds(new Point(x,y),
             new Point(bounds.x, bounds.y));
-        if (x > bounds.x + bounds.width) {
-            owner.swapHorizontal();
-        }
-        if (y > bounds.y) {
-            owner.swapHorizontal();
-        }
     }
 
 }

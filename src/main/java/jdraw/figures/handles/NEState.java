@@ -30,14 +30,14 @@ public class NEState implements HandleState {
     @Override
     public void dragInteraction(int x, int y, MouseEvent e, DrawView v) {
         var bounds = owner.getBounds();
-        owner.setBounds(new Point(x,y),
-            new Point(bounds.x, bounds.y + bounds.height));
-        if (x > bounds.x + bounds.width) {
+        if (x < bounds.x) {
             owner.swapHorizontal();
         }
         if (y > bounds.y + bounds.height) {
-            owner.swapHorizontal();
+            owner.swapVertical();
         }
+        owner.setBounds(new Point(x,y),
+            new Point(bounds.x, bounds.y + bounds.height));
     }
 
     @Override

@@ -43,7 +43,7 @@ public class NWState implements HandleState {
             owner.swapHorizontal();
         }
         if (y > bounds.y + bounds.height) {
-            owner.swapHorizontal();
+            owner.swapVertical();
         }
 
     }
