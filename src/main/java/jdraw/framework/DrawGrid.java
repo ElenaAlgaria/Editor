@@ -13,11 +13,14 @@ import java.awt.Point;
  * 
  * @author Dominik Gruntz &amp; Christoph Denzler
  * @version 2.5
+ *
  */
 public interface DrawGrid {
 
 	/**
 	 * Returns constrained coordinates for p, e.g. rounded to a grid.
+
+	 Strategy Methode:
 	 * 
 	 * @param p mouse coordinates
 	 * @return constrained coordinates
