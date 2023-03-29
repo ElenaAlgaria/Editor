@@ -133,14 +133,11 @@ public class StdContext extends AbstractContext {
             for (Figure g : selection) {
                 // uf FG will allgemeine Typ für alli
                 if (g instanceof FigureGroup) {
-//                    for (Figure f : ((FigureGroup) g).getFigureParts()) {
                     getModel().removeFigure(g);
                     ((FigureGroup) g).getFigureParts().forEach(f -> {
                         getModel().addFigure(f);
                         getView().addToSelection(f);
-                        System.out.println("braaa");
                     });
-//                    }
                 }
             }
         });
