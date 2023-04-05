@@ -30,22 +30,31 @@ import jdraw.std.AbstractRectangularFigure;
 public class Rect extends AbstractRectangularFigure {
 	private static final long seriralVersionUID = 9120181044386552132L;
 
-
-	// für tests
-	public Rect(int x, int y, int width, int height) {
-		super(x,y);
-	}
-
 	/**
-	 * Create a new rectangle of the given dimension.
-	 * 
 	 * @param x the x-coordinate of the upper left corner of the rectangle
 	 * @param y the y-coordinate of the upper left corner of the rectangle
+	 * @param width
+	 * @param height
+	 *
 	 */
+	// für tests
+	public Rect(int x, int y, int width, int height) {
+		super(x, y);
+	}
+/**
+ * Create a new rectangle of the given dimension.
+	 * @param x the x-coordinate of the upper left corner of the rectangle
+	 * @param y the y-coordinate of the upper left corner of the rectangle
+
+ */
 	public Rect(int x, int y) {
-		this(x, y, 0, 0);
+		this(x, y, 0,0);
 	}
 
+	// für copy, s git kein clonable state darum do nur super
+	public Rect(Rect source) {
+		super(source);
+	}
 	/**
 	 * Draw the rectangle to the given graphics context.
 	 * 
@@ -58,6 +67,11 @@ public class Rect extends AbstractRectangularFigure {
 		g.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 		g.setColor(Color.BLACK);
 		g.drawRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+	}
+
+	@Override
+	public Rect clone(){
+		return new Rect(this);
 	}
 
 

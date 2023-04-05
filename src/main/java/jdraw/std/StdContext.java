@@ -4,7 +4,9 @@
  */
 package jdraw.std;
 
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,10 +40,15 @@ import jdraw.grid.SimpleGrid;
  */
 @SuppressWarnings("serial")
 public class StdContext extends AbstractContext {
+
+    private final List<Figure> clipboard;
+
     /**
      * Constructs a standard context with a default set of drawing tools.
      *
      * @param view the view that is displaying the actual drawing.
+     *             <p>
+     *             mit this aufruf gehts zum andere constructor wiiter
      */
     public StdContext(DrawView view) {
         this(view, null);
@@ -57,6 +64,7 @@ public class StdContext extends AbstractContext {
      */
     public StdContext(DrawView view, List<DrawToolFactory> toolFactories) {
         super(view, toolFactories);
+        clipboard = new ArrayList<>();
     }
 
     /**
@@ -97,9 +105,36 @@ public class StdContext extends AbstractContext {
         });
 
         editMenu.addSeparator();
-        editMenu.add("Cut").setEnabled(false);
-        editMenu.add("Copy").setEnabled(false);
-        editMenu.add("Paste").setEnabled(false);
+
+        ActionListener cutAction = e -> {
+            clipboard.clear();
+            for (Figure f : sortInModelOrder(getView().getSelection())) {
+                clipboard.add(f);
+                getModel().removeFigure(f);
+            }
+        };
+
+        editMenu.add(createMenuItem("Cut", cutAction, "control x"));
+
+        ActionListener copyAction = e -> {
+            clipboard.clear();
+            for (Figure f : sortInModelOrder(getView().getSelection())) {
+                clipboard.add(f.clone()); // dieser clone ist der prototype
+            }
+        };
+
+        editMenu.add(createMenuItem("Copy", copyAction, "control c"));
+
+        ActionListener pasteaction = e -> {
+            getView().clearSelection();
+            for (Figure f : sortInModelOrder(clipboard)){
+                getModel().addFigure(f.clone());
+                getView().addToSelection(f.clone());
+
+            }
+        };
+
+        editMenu.add(createMenuItem("Paste", pasteaction, "control v"));
 
         editMenu.addSeparator();
         JMenuItem clear = new JMenuItem("Clear");
@@ -168,6 +203,19 @@ public class StdContext extends AbstractContext {
 
 
         return editMenu;
+    }
+
+    private JMenuItem createMenuItem(String label, ActionListener listener, String shortCut) {
+        JMenuItem item = new JMenuItem(label);
+        item.addActionListener(listener);
+        item.setAccelerator(KeyStroke.getKeyStroke(shortCut));
+        return item;
+
+    }
+
+    // zum zeichnigs ordnig becho wo im model dinne ish
+    private List<Figure> sortInModelOrder(List<Figure> selection) {
+        return getModel().getFigures().filter(selection::contains).collect(Collectors.toList());
     }
 
     // refactoring

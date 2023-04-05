@@ -30,6 +30,17 @@ public class Group extends AbstractRectangularFigure implements FigureGroup {
         this.parts = model.getFigures().filter(parts::contains).collect(Collectors.toList());
     }
 
+    // copy constr, map jedi f copy und de wieder sammle als liste als parts
+    public Group(Group source) {
+        super(source);
+        parts = source.parts.stream().map(Figure::clone).toList();
+    }
+
+    @Override
+    public Group clone(){
+        return new Group(this);
+    }
+
     @Override
     public void draw(Graphics g) {
         for (Figure f : parts) {

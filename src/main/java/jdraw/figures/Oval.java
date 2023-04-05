@@ -38,6 +38,15 @@ public class Oval extends AbstractRectangularFigure {
 		oval = new Ellipse2D.Double();
 	}
 
+	public Oval(Oval source) {
+		super(source);
+		oval = (Ellipse2D) source.oval.clone();
+	}
+
+	@Override
+	public Oval clone(){
+		return new Oval(this);
+	}
 
 	/**
 	 * Draw the rectangle to the given graphics context.

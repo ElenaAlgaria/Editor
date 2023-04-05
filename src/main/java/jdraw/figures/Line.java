@@ -44,6 +44,17 @@ public class Line extends AbstractFigure {
         super();
         line = new Line2D.Double(x, y, x, y);
     }
+    // handles unde mit getHandles gmacht darum do ned inne neh
+    public Line(Line source) {
+        super(source);
+        line = (Line2D) source.line.clone();
+    }
+
+    // clone() in jeder konkreten klasse alli wo new ... hend,
+    @Override
+    public Line clone(){
+        return new Line(this);
+    }
 
     /**
      * Draw the rectangle to the given graphics context.

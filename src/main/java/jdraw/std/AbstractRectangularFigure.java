@@ -39,6 +39,12 @@ public abstract class AbstractRectangularFigure extends AbstractFigure {
         this.rectangle = new Rectangle(x, y, 0, 0);
     }
 
+    protected AbstractRectangularFigure(AbstractRectangularFigure source) {
+        super(source);
+        // copy des rectangles mit de handles wo ide liste dinne sind hemmer eso e copy vom clonable state
+        this.rectangle = (Rectangle) source.rectangle.clone();
+    }
+
     @Override
     // 3) cycle mit em if unterbroche, model sött nur notifye wenns model au wük veränderet worde isch
     public void move(int dx, int dy) {
