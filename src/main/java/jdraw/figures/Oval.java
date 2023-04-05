@@ -48,6 +48,15 @@ public class Oval extends AbstractRectangularFigure {
 		return new Oval(this);
 	}
 
+//	java cloning
+//	@Override
+//	public Oval clone(){
+//		Oval o = (Oval) super.clone();
+//		o.oval = (Ellipse2D.Float) oval.clone();
+//		return o;
+//	}
+
+
 	/**
 	 * Draw the rectangle to the given graphics context.
 	 * 

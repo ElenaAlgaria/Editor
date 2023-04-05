@@ -71,8 +71,16 @@ public class Rect extends AbstractRectangularFigure {
 
 	@Override
 	public Rect clone(){
+		System.out.println("Rect copy");
 		return new Rect(this);
 	}
+
+// java cloning, eif zrugg geh, doh bruchts es ned unbedingt weil mir do kein clonable state kopiere tüend u will niemmert
+// clients es rect erwartet sondern figure darum ienge vo rückgabetyp ned nötig
+//	@Override
+//	public Rect clone(){
+//		return (Rect) super.clone();
+//	}
 
 
 }

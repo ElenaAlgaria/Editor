@@ -18,7 +18,7 @@ import java.awt.Rectangle;
 import java.util.List;
 
 public abstract class AbstractRectangularFigure extends AbstractFigure {
-    // wird nur do inne brucht nachem new nümme ändere darum final und private
+    // wird nur do inne brucht nachem new nümme ändere darum final und private, für java cloning s final wegneh
     private final Rectangle rectangle;
 
     // initial state für diese handle
@@ -102,4 +102,17 @@ public abstract class AbstractRectangularFigure extends AbstractFigure {
             h.setState(h.getState().swapHorizontal());
         }
     }
+
+//    java cloning, state copy, clonable state doh deep copy mache, super.clone = shallow copy, will clonable state hett attribut obe
+//   überall wo nötig modifiziere für deep copy vo de attribut aso vo de states, clone nur dert wos clonbable state git oder
+    // wo mer rückgabe type ienge muess, doh innebruchts will mer obe rect hend clonable state, will do nur shallow copy
+    // süscht ohni das, will neus rect mache mer doh
+//    @Override
+//    public AbstractRectangularFigure clone(){
+//        AbstractRectangularFigure f = (AbstractRectangularFigure) super.clone();
+//        f.rectangle = (Rectangle) rectangle.clone();
+    // demit gethandles richtig funktioniert
+//        f.handles = null;
+//        return f;
+//    }
 }

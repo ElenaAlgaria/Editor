@@ -41,6 +41,14 @@ public class Group extends AbstractRectangularFigure implements FigureGroup {
         return new Group(this);
     }
 
+//    java cloning, liste vo fig kopiere mit map und neui liste drus mache
+//    @Override
+//    public Group clone(){
+//        Group g = (Group) super.clone(); liefert immer dynamische typ zurück aso de mit em new
+//        g.parts = g.parts.stream().map(Figure::clone).toList();
+//        return g;
+//    }
+
     @Override
     public void draw(Graphics g) {
         for (Figure f : parts) {

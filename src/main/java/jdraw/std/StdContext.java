@@ -114,27 +114,27 @@ public class StdContext extends AbstractContext {
             }
         };
 
-        editMenu.add(createMenuItem("Cut", cutAction, "control x"));
+        editMenu.add(createMenuItem("Cut", cutAction, "control X"));
 
         ActionListener copyAction = e -> {
             clipboard.clear();
             for (Figure f : sortInModelOrder(getView().getSelection())) {
                 clipboard.add(f.clone()); // dieser clone ist der prototype
+                System.out.println("Copy");
             }
         };
 
-        editMenu.add(createMenuItem("Copy", copyAction, "control c"));
+        editMenu.add(createMenuItem("Copy", copyAction, "control C"));
 
-        ActionListener pasteaction = e -> {
-            getView().clearSelection();
-            for (Figure f : sortInModelOrder(clipboard)){
+        ActionListener pasteAction = e -> {
+            for (Figure f : clipboard){
                 getModel().addFigure(f.clone());
                 getView().addToSelection(f.clone());
-
+                System.out.println("paste");
             }
         };
 
-        editMenu.add(createMenuItem("Paste", pasteaction, "control v"));
+        editMenu.add(createMenuItem("Paste", pasteAction, "control V"));
 
         editMenu.addSeparator();
         JMenuItem clear = new JMenuItem("Clear");

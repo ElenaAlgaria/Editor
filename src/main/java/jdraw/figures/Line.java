@@ -56,6 +56,15 @@ public class Line extends AbstractFigure {
         return new Line(this);
     }
 
+//  java cloning, deep copy, handels beim ersten mal richtig gmacht werdet darum doh null
+//    @Override
+//    public Line clone(){
+//        Line l = (Line) super.clone();
+//        l.line = (Line2D) line.clone();
+//        l.handles = null;
+//        return l;
+//    }
+
     /**
      * Draw the rectangle to the given graphics context.
      *
