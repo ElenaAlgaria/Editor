@@ -20,7 +20,7 @@ public class Group extends AbstractRectangularFigure implements FigureGroup {
 
     public Group(DrawModel model, List<Figure> parts) {
         super(0, 0);
-        if (parts == null || parts.size() == 0){
+        if (parts == null || parts.isEmpty()){
             throw new IllegalArgumentException();
         }
         // entkoppellung, clone the list vom parametera

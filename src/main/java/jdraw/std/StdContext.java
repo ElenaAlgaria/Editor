@@ -6,6 +6,11 @@ package jdraw.std;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -299,7 +304,7 @@ public class StdContext extends AbstractContext {
     }
 
     /**
-     * Handles the saving of a drawing to a file.
+     * Handles the saving of a drawing to a file., schreibt
      */
     private void doSave() {
         JFileChooser chooser = new JFileChooser(getClass().getResource("").getFile());
@@ -320,13 +325,24 @@ public class StdContext extends AbstractContext {
                 file = new File(chooser.getCurrentDirectory(),
                     file.getName() + "." + ((FileNameExtensionFilter) filter).getExtensions()[0]);
             }
+            // foreach f clone, save, null = end marker, close, out -> geht ins file rein
+            try(ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(file))){
+                for (Figure f: getModel().getFigures().toList()) {
+                    o.writeObject(f.clone()); // clone keine listener dabei so will die wemmer ned
+                }
+                o.writeObject(null); // end marker setze fertig
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+
             System.out.println("save current graphic to file " + file.getName() + " using format "
                 + ((FileNameExtensionFilter) filter).getExtensions()[0]);
         }
     }
 
     /**
-     * Handles the opening of a new drawing from a file.
+     * Handles the opening of a new drawing from a file., liest
      */
     private void doOpen() {
         JFileChooser chooser = new JFileChooser(getClass().getResource("").getFile());
@@ -348,6 +364,20 @@ public class StdContext extends AbstractContext {
         if (res == JFileChooser.APPROVE_OPTION) {
             // read jdraw graphic
             System.out.println("read file " + chooser.getSelectedFile().getName());
+
+            try(ObjectInputStream o = new ObjectInputStream(new FileInputStream(chooser.getSelectedFile()))){
+                getModel().removeAllFigures(); // alli entferne wenn mers file ufmacht
+                Object f = o.readObject();
+                while (f != null){
+                    if (f instanceof Figure){
+                        getModel().addFigure((Figure) f);
+                    }
+                    f = o.readObject();
+                }
+                System.out.println(f);
+            }catch (IOException  | ClassNotFoundException e){
+                e.printStackTrace();
+            }
         }
     }
 

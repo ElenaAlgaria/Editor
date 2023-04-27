@@ -22,17 +22,18 @@ public abstract class AbstractRectangularFigure extends AbstractFigure {
     private final Rectangle rectangle;
 
     // initial state für diese handle
-    private final Handle nw = new Handle(new NWState(this));
-    private final Handle sw = new Handle(new SWState(this));
-    private final Handle se = new Handle(new SEState(this));
-    private final Handle ne = new Handle(new NEState(this));
-    private final Handle w  = new Handle(new WState(this));
-    private final Handle e = new Handle(new EState(this));
-    private final Handle n = new Handle(new NState(this));
-    private final Handle s = new Handle(new SState(this));
+    private final transient Handle nw = new Handle(new NWState(this));
+    private final transient Handle sw = new Handle(new SWState(this));
+    private final transient Handle se = new Handle(new SEState(this));
+    private final transient Handle ne = new Handle(new NEState(this));
+    private final transient Handle w  = new Handle(new WState(this));
+    private final transient Handle e = new Handle(new EState(this));
+    private final transient Handle n = new Handle(new NState(this));
+    private final transient Handle s = new Handle(new SState(this));
 
 
-    private final List<FigureHandle> handles = List.of(nw, ne, sw, se,n, s, w, e);
+
+    private final transient List<FigureHandle> handles = List.of(nw, ne, sw, se,n, s, w, e);
 
 
     protected AbstractRectangularFigure(int x, int y) {
