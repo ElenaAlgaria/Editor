@@ -158,4 +158,7 @@ public class StdDrawModel implements DrawModel, FigureListener {
     public void notifyObservers(FigureEvent e) {
         notifyObservers(e.getFigure(), DrawModelEvent.Type.FIGURE_CHANGED);
     }
+
+
+
 }

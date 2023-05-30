@@ -202,10 +202,11 @@ public final class StdDrawView extends JComponent implements DrawView {
 		}
 	}
 
+	// decorator 2) equals
 	@Override
 	public void removeFromSelection(Figure f) {
 		if (selection.remove(f)) {
-			handles.removeIf(h -> h.getOwner() == f);
+			handles.removeIf(h -> f.equals(h.getOwner()));
 		}
 	}
 

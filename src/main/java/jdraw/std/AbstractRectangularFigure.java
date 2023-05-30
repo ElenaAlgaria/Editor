@@ -104,6 +104,7 @@ public abstract class AbstractRectangularFigure extends AbstractFigure {
         }
     }
 
+
 //    java cloning, state copy, clonable state doh deep copy mache, super.clone = shallow copy, will clonable state hett attribut obe
 //   überall wo nötig modifiziere für deep copy vo de attribut aso vo de states, clone nur dert wos clonbable state git oder
     // wo mer rückgabe type ienge muess, doh innebruchts will mer obe rect hend clonable state, will do nur shallow copy

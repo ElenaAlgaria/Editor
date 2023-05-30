@@ -109,4 +109,6 @@ public interface Figure extends Serializable {
 	 * @return clone of figure
 	 */
 	Figure clone();
+
+
 }

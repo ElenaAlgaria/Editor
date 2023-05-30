@@ -304,6 +304,8 @@ public class DrawModelTest {
 			public void removeFigureListener(FigureListener listener) { }
 			@Override
 			public Figure clone() { return null; }
+
+
 		};
 		DrawModelListener listener = mock(DrawModelListener.class);
 

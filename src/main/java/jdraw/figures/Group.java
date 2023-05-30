@@ -41,6 +41,7 @@ public class Group extends AbstractRectangularFigure implements FigureGroup {
         return new Group(this);
     }
 
+
 //    java cloning, liste vo fig kopiere mit map und neui liste drus mache
 //    @Override
 //    public Group clone(){

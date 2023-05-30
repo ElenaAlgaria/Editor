@@ -79,5 +79,4 @@ public class Oval extends AbstractRectangularFigure {
 		return oval.contains(x, y);
 	}
 
-
 }

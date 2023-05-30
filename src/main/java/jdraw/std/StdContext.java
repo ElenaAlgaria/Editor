@@ -23,6 +23,9 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import jdraw.decorators.AbstractDecorator;
+import jdraw.decorators.BorderDecorator;
+import jdraw.decorators.GreenDecorator;
 import jdraw.figures.Group;
 import jdraw.figures.LineTool;
 import jdraw.figures.OvalTool;
@@ -171,10 +174,14 @@ public class StdContext extends AbstractContext {
             // selection und de luege obs en groupfigure ish und de, if instanceof, getFigureParts,
             List<Figure> selection = getView().getSelection();
             for (Figure g : selection) {
+//                if (g.isInstanceOf(GreenDecorator.class)){
+//                    g = ((GreenDecorator)g).getInner();
+//                }
                 // uf FG will allgemeine Typ für alli
-                if (g instanceof FigureGroup) {
+                if (g instanceof FigureGroup ) {
                     getModel().removeFigure(g);
                     ((FigureGroup) g).getFigureParts().forEach(f -> {
+                      //  f = new GreenDecorator(f);
                         getModel().addFigure(f);
                         getView().addToSelection(f);
                     });
@@ -206,6 +213,58 @@ public class StdContext extends AbstractContext {
         grid.add(addFixedGridMenu("Fixed 20", new SimpleGrid(getView(), 20)));
         grid.add(addFixedGridMenu("Fixed 100", new SimpleGrid(getView(), 100)));
 
+        editMenu.addSeparator();
+
+        JMenu descMenu = new JMenu("Decorators...");
+        editMenu.add(descMenu);
+        JMenuItem addGreen = new JMenuItem("Toggle Green Decorator");
+        descMenu.add(addGreen);
+        addGreen.addActionListener(e -> {
+            List<Figure> s = getView().getSelection();
+            getView().clearSelection();
+            for (Figure f : s){
+                Figure newFigure = null;
+                if (f instanceof GreenDecorator){
+                    newFigure = ((GreenDecorator)f).getInner(); // auspacken
+                } else {
+                    newFigure = new GreenDecorator(f); // einpacken
+                }
+                getModel().removeFigure(f);
+                getModel().addFigure(newFigure);
+                getView().addToSelection(newFigure);
+
+            }
+        });
+
+        JMenuItem addBorder = new JMenuItem("Add Border Decorator");
+        descMenu.add(addBorder);
+        addBorder.addActionListener(e -> {
+            List<Figure> s = getView().getSelection();
+            getView().clearSelection();
+            for (Figure f : s){
+                AbstractDecorator dec = new BorderDecorator(f);
+                getModel().removeFigure(f);
+                getModel().addFigure(dec);
+                getView().addToSelection(dec);
+
+            }
+        });
+
+        JMenuItem removeBorder = new JMenuItem("Remove Border Decorator");
+        descMenu.add(removeBorder);
+        removeBorder.addActionListener(e -> {
+            List<Figure> s = getView().getSelection();
+            getView().clearSelection();
+            for (Figure f : s){
+                if (f instanceof BorderDecorator){
+                AbstractDecorator borderDecorator =  (BorderDecorator) f;
+                getModel().removeFigure(borderDecorator);
+                getModel().addFigure(borderDecorator.getInner());
+                getView().addToSelection(borderDecorator.getInner());
+                }
+
+            }
+        });
 
         return editMenu;
     }

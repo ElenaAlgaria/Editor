@@ -1,12 +1,9 @@
 package jdraw.figures;
 
-import jdraw.figures.handles.NEState;
-import jdraw.figures.handles.SWState;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureEvent;
 import jdraw.framework.FigureHandle;
 import jdraw.framework.FigureListener;
-import jdraw.framework.HandleState;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -45,7 +42,7 @@ public abstract class  AbstractFigure implements Figure {
      * @see Figure#getHandles()
      */
     @Override
-    public List<FigureHandle> getHandles() {
+    public List<? extends FigureHandle> getHandles() {
         return null;
     }
 
