@@ -16,6 +16,7 @@ import java.util.stream.Stream;
  * @author Dominik Gruntz &amp; Christoph Denzler
  * @version 2.5
  */
+// command rolle receiver
 public interface DrawModel {
 
 	/**

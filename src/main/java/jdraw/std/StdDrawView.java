@@ -21,6 +21,8 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
+import jdraw.commands.MoveCommand;
+import jdraw.commands.RemoveFigureCommand;
 import jdraw.framework.DrawContext;
 import jdraw.framework.DrawModel;
 import jdraw.framework.DrawModelEvent;

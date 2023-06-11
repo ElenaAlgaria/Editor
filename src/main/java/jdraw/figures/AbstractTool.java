@@ -3,6 +3,7 @@ package jdraw.figures;
 import jdraw.framework.DrawContext;
 import jdraw.framework.DrawTool;
 import jdraw.framework.Figure;
+import jdraw.commands.AddFigureCommand;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -10,6 +11,7 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+// command teil rolle client
 public abstract class AbstractTool implements DrawTool {
     /**
      * The context we use for drawing.
@@ -111,6 +113,8 @@ public abstract class AbstractTool implements DrawTool {
      */
     @Override
     public void mouseUp(int x, int y, MouseEvent e) {
+        //hier existiert eine neue Figur
+        context.getModel().getDrawCommandHandler().addCommand(new AddFigureCommand(context.getModel(),newFigure));
         newFigure = null;
         anchor = null;
         this.context.showStatusText("Rectangle Mode");
@@ -138,6 +142,7 @@ public abstract class AbstractTool implements DrawTool {
         anchor = new Point(x, y);
         // anstatt new Rect
         newFigure = createFigureAt(x, y);
+        // figur wird dem model hinzugefügt
         context.getView().getModel().addFigure(newFigure);
     }
 

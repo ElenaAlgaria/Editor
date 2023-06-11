@@ -23,6 +23,8 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import jdraw.commands.GroupFigureCommand;
+import jdraw.commands.UngroupFigureCommand;
 import jdraw.decorators.AbstractDecorator;
 import jdraw.decorators.BorderDecorator;
 import jdraw.decorators.GreenDecorator;
@@ -165,6 +167,7 @@ public class StdContext extends AbstractContext {
                 // gruppef hinzuefüege um so kei zykle zha mit dem kommentar vo vorher
                 getModel().addFigure(groupFigure);
                 getView().addToSelection(groupFigure);
+                getModel().getDrawCommandHandler().addCommand(new GroupFigureCommand(getModel(), groupFigure));
             }
         });
         editMenu.add(group);
@@ -174,17 +177,14 @@ public class StdContext extends AbstractContext {
             // selection und de luege obs en groupfigure ish und de, if instanceof, getFigureParts,
             List<Figure> selection = getView().getSelection();
             for (Figure g : selection) {
-//                if (g.isInstanceOf(GreenDecorator.class)){
-//                    g = ((GreenDecorator)g).getInner();
-//                }
-                // uf FG will allgemeine Typ für alli
+//              // uf FG will allgemeine Typ für alli
                 if (g instanceof FigureGroup ) {
                     getModel().removeFigure(g);
                     ((FigureGroup) g).getFigureParts().forEach(f -> {
-                      //  f = new GreenDecorator(f);
                         getModel().addFigure(f);
                         getView().addToSelection(f);
                     });
+                    getModel().getDrawCommandHandler().addCommand(new UngroupFigureCommand(getModel(), (FigureGroup) g));
                 }
             }
         });

@@ -1,5 +1,6 @@
 package jdraw.figures.handles;
 
+import jdraw.commands.SetBoundsCommand;
 import jdraw.framework.DrawView;
 import jdraw.framework.Figure;
 import jdraw.framework.FigureHandle;
@@ -9,6 +10,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 // nach state is de kontext, nw immer nw wechselt zustand evt
@@ -16,6 +18,7 @@ import java.awt.event.MouseEvent;
 public class Handle implements FigureHandle {
     private HandleState state;
     private static final int HANDLE_SIZE = 6;
+    private Rectangle startBounds;
 
     public Handle(HandleState handleState) {
      this.state = handleState;
@@ -65,11 +68,11 @@ public class Handle implements FigureHandle {
     }
 
     public void startInteraction(int x, int y, MouseEvent e, DrawView v) {
-
+         startBounds = getOwner().getBounds();
     }
 
     public void stopInteraction(int x, int y, MouseEvent e, DrawView v) {
-
+        v.getModel().getDrawCommandHandler().addCommand(new SetBoundsCommand(getOwner(), startBounds));
     }
 
 }

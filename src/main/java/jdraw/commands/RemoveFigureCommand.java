@@ -3,7 +3,7 @@
  * All Rights Reserved.
  */
 
-package jdraw.std;
+package jdraw.commands;
 
 import java.util.List;
 import java.util.stream.Collectors;

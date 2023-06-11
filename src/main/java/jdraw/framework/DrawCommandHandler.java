@@ -5,6 +5,8 @@
 
 package jdraw.framework;
 
+import jdraw.commands.CompositeDrawCommand;
+
 /**
  * The interface DrawCommandHandler defines the handler which allows to access
  * the command history provided by a draw model. The list of commands can be
@@ -15,7 +17,7 @@ package jdraw.framework;
  * @author Dominik Gruntz &amp; Christoph Denzler
  * @version 2.5
  */
-
+// command rolle invoker
 public interface DrawCommandHandler {
 
 	/**
@@ -79,4 +81,8 @@ public interface DrawCommandHandler {
 	 * Clears the command list.
 	 */
 	void clearHistory();
+
+
+
+
 }

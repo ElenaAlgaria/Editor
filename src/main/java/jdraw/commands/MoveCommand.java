@@ -3,7 +3,7 @@
  * All Rights Reserved.
  */
 
-package jdraw.std;
+package jdraw.commands;
 
 import jdraw.framework.DrawCommand;
 import jdraw.framework.Figure;

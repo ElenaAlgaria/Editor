@@ -10,6 +10,7 @@ import java.util.List;
 
 import java.util.stream.Stream;
 
+import jdraw.commands.MyDrawCommandHandler;
 import jdraw.framework.DrawCommandHandler;
 import jdraw.framework.DrawModel;
 import jdraw.framework.DrawModelEvent;
@@ -92,10 +93,10 @@ public class StdDrawModel implements DrawModel, FigureListener {
     }
 
     /**
-     * The draw command handler. Initialized here with a dummy implementation.
+     * The draw command handler.
      */
-    // TODO initialize with your implementation of the undo/redo-assignment.
-    private DrawCommandHandler handler = new EmptyDrawCommandHandler();
+
+    private DrawCommandHandler handler = new MyDrawCommandHandler();
 
     /**
      * Retrieve the draw command handler in use.
