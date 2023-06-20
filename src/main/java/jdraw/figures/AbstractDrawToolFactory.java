@@ -12,22 +12,21 @@ public abstract class AbstractDrawToolFactory implements DrawToolFactory {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public void setName(String name) {
-
+        this.name = name;
     }
 
     @Override
     public String getIconName() {
-        return null;
+        return iconName;
     }
 
     @Override
-    public void setIconName(String name) {
-
+    public void setIconName(String iconName) {
+        this.iconName = iconName;
     }
-
 }

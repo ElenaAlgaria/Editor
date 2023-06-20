@@ -319,6 +319,7 @@ public class StdContext extends AbstractContext {
     protected void doRegisterDrawTools() {
         //zum alli tools regristiere
       getToolFactories().forEach(f -> addTool((f != null) ? f.createTool(this) : null));
+
     }
 
     /**
