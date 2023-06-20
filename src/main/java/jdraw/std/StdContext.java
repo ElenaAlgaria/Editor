@@ -317,14 +317,8 @@ public class StdContext extends AbstractContext {
 
     @Override
     protected void doRegisterDrawTools() {
-        DrawTool rectangleTool = new RectTool(this);
-        addTool(rectangleTool);
-        // TODO Add new figure tools here
-        DrawTool ovalTool = new OvalTool(this);
-        addTool(ovalTool);
-
-        DrawTool lineTool = new LineTool(this);
-        addTool(lineTool);
+        //zum alli tools regristiere
+      getToolFactories().forEach(f -> addTool((f != null) ? f.createTool(this) : null));
     }
 
     /**

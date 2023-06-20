@@ -19,17 +19,17 @@
 
 		<constructor-arg>
 			<list>	<!-- null represents a separator -->
-<!--
+
 				<ref bean="line"/>
 				<ref bean="rectangle"/>
 				<ref bean="oval"/>
--->
+				<ref bean="swiss"/>
+
 			</list>
 		</constructor-arg>
 	</bean>
 
 
-<!--
 	<bean id="rectangle" class="jdraw.figures.RectangleToolFactory">
 		<property name="name"><value>Rectangle</value></property>
 		<property name="iconName"><value>rectangle.png</value></property>
@@ -44,6 +44,11 @@
 		<property name="name"><value>Oval</value></property>
 		<property name="iconName"><value>oval.png</value></property>
 	</bean>
--->
+
+	<bean id="swiss" class="jdraw.figures.ernst.SwissCrossToolFactory">
+		<property name="name"><value>Oval</value></property>
+		<property name="iconName"><value>oval.png</value></property>
+	</bean>
+
 
 </beans>

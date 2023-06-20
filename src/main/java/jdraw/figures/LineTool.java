@@ -26,8 +26,8 @@ import java.awt.event.MouseEvent;
  */
 public class LineTool extends AbstractTool {
 
-	public LineTool(DrawContext context) {
-	super(context, "Line", "line.png");
+	public LineTool(DrawContext context, String name, String iconName) {
+		super(context, name, iconName);
 	}
 
 	@Override

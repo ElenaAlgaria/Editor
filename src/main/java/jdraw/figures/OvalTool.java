@@ -26,8 +26,8 @@ import java.awt.event.MouseEvent;
  */
 public final class OvalTool extends AbstractTool {
 
-	public OvalTool(DrawContext context) {
-		super(context, "Oval", "oval.png");
+	public OvalTool(DrawContext context, String name, String iconName) {
+		super(context, name, iconName);
 	}
 
 	@Override

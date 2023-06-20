@@ -26,9 +26,11 @@ public final class RectTool extends AbstractTool {
 	 * 
 	 * @param context a context to use this tool in.
 	 */
-	public RectTool(DrawContext context) {
-		// super für die parent class wo en parameter verlangt
-		super(context, "Rectangle", "rectangle.png");
+
+	// super will abstrakti klass und die 3 parameter neh vo dert
+	public RectTool(DrawContext context, String name, String iconName){
+		super(context, name, iconName);
+
 	}
 
 	// vo abstrakte () wegem new ...
