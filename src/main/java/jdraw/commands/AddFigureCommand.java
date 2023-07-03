@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
  * @author Christoph Denzler
  * 
  */
-// command rolle concrete command
+// command rolle concrete command, muss beim invoker regristiert werde
+	// jedes mal wenn eine neue figur hinzugefügt wird gits e neue addFC
 public class AddFigureCommand implements DrawCommand {
 
 	/** The model from which to remove the figure. */

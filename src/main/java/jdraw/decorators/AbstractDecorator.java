@@ -18,7 +18,7 @@ public abstract class AbstractDecorator extends AbstractFigure {
     private final Figure inner;
 
     protected AbstractDecorator(AbstractDecorator source) {
-        // deep copy
+        // deep copy, zum ned de glichi rahme zwoi mal zmache
         this.inner = source.inner.clone();
     }
 
@@ -26,6 +26,7 @@ public abstract class AbstractDecorator extends AbstractFigure {
         this.inner = figure;
     }
 
+    // weg de handles und em bim lösche ned weggoh, getOwner
     @Override
     public boolean equals(Object that) {
         return this == that || inner.equals(that);

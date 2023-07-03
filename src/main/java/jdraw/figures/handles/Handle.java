@@ -71,6 +71,7 @@ public class Handle implements FigureHandle {
          startBounds = getOwner().getBounds();
     }
 
+    // für setBoundscommand
     public void stopInteraction(int x, int y, MouseEvent e, DrawView v) {
         v.getModel().getDrawCommandHandler().addCommand(new SetBoundsCommand(getOwner(), startBounds));
     }

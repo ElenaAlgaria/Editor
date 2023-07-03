@@ -5,6 +5,7 @@ import jdraw.framework.DrawCommand;
 import java.util.ArrayList;
 import java.util.List;
 
+// aka Script liste vo allne commands
 public class CompositeDrawCommand implements DrawCommand {
 
     private final List<DrawCommand> commands = new ArrayList<>();

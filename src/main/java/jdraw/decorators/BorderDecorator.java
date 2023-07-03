@@ -17,7 +17,7 @@ public class BorderDecorator extends AbstractDecorator {
         super(source);
     }
 
-    // für de rahmen grow
+    // für de rahmen grow, überschriebe will de brucht sin platz doh
     @Override
     public Rectangle getBounds(){
          var bounds = super.getBounds();
@@ -25,10 +25,11 @@ public class BorderDecorator extends AbstractDecorator {
          return bounds;
     }
 
+    // rahme zeichne
     @Override
     public void draw(Graphics g) {
         var b = getBounds();
-
+        // wenn do obe super de würd graphics zerst zeichne wege inner
         g.setColor(Color.lightGray);
         g.drawLine(b.x,b.y,b.x + b.width,b.y); // nord
         g.drawLine(b.x,b.y,b.x,b.y + b.height); // west
@@ -46,11 +47,13 @@ public class BorderDecorator extends AbstractDecorator {
         return new BorderDecorator(this);
     }
 
+    // demit de rahme selektierbar ish
     @Override
     public boolean contains (int x, int y){
          return  getBounds().contains(x,y);
     }
 
+    // weg de handles und em bim lösche ned weggoh, getOwner
     @Override
     public boolean equals(Object that){
         return this == that || super.getInner().equals(that);

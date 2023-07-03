@@ -113,7 +113,7 @@ public abstract class AbstractTool implements DrawTool {
      */
     @Override
     public void mouseUp(int x, int y, MouseEvent e) {
-        //hier existiert eine neue Figur
+        //hier existiert eine neue Figur, hier die figur ist erzeugt, addFC mache und bi drawCH regristriere
         context.getModel().getDrawCommandHandler().addCommand(new AddFigureCommand(context.getModel(),newFigure));
         newFigure = null;
         anchor = null;
@@ -134,6 +134,7 @@ public abstract class AbstractTool implements DrawTool {
      *
      * @see jdraw.framework.DrawTool#mouseDown(int, int, MouseEvent)
      */
+    // do wird figur zum model tho also ish das s execute oder wie mers nennet s redo
     @Override
     public void mouseDown(int x, int y, MouseEvent e) {
         if (newFigure != null) {

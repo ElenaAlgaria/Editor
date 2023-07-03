@@ -17,8 +17,9 @@ import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.List;
 
-// de ish e fall für sich
+// de ish e fall für sich, figure is component
 public class GreenDecorator implements Figure {
+    // d figur wo dekoriert wird
     private final Figure inner;
 
     public GreenDecorator(Figure f) {
@@ -35,6 +36,7 @@ public class GreenDecorator implements Figure {
         return inner;
     }
 
+    // decorator ins spiel bringen
     public void draw(Graphics g) {
         inner.draw(new GraphicDecorator(g));
     }

@@ -5,8 +5,10 @@
 
 package jdraw;
 
+import jdraw.figures.Rect;
 import jdraw.framework.DrawContext;
 
+import jdraw.framework.Figure;
 import org.apache.log4j.BasicConfigurator;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -52,6 +54,10 @@ public final class JDraw {
 	public static void main(final String[] args) {
 		// configure log4j according to a log4j.properties file found in classpath
 		BasicConfigurator.configure();
+		int a = 10;
+		int b = 8;
+
+
 
 		if (args.length > 0) {
 			springContext = args[0];

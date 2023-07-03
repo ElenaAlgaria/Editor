@@ -12,7 +12,7 @@ public class MyDrawCommandHandler implements DrawCommandHandler {
 
     private CompositeDrawCommand script;
 
-
+// fügt command in undostack willer do im do stack ish
     @Override
     public void addCommand(DrawCommand cmd) {
         if (script != null){
@@ -20,9 +20,10 @@ public class MyDrawCommandHandler implements DrawCommandHandler {
         }else{
         undoStack.push(cmd);
         }
-        redoStack.clear();
+        redoStack.clear(); // wird geleert
     }
 
+    // bi addFC wirds rückgängig gmacht wege pop, figur wird vom model entfärnt
     @Override
     public void undo() {
     DrawCommand cmd = undoStack.pop();
