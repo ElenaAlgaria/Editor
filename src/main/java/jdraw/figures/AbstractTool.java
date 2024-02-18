@@ -146,6 +146,4 @@ public abstract class AbstractTool implements DrawTool {
         // figur wird dem model hinzugefügt
         context.getView().getModel().addFigure(newFigure);
     }
-
-
 }

@@ -29,6 +29,7 @@ public interface DrawCommandHandler {
 	 */
 	void addCommand(DrawCommand cmd);
 
+
 	/**
 	 * Undoes the last command in the command list. This command can be redone with
 	 * operation redo unless new commands are added to the command list.

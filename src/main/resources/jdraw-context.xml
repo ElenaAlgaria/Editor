@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans spring-beans.xsd">
@@ -8,7 +9,7 @@
 	<bean id="drawView" class="jdraw.std.StdDrawView" scope="prototype">
 		<constructor-arg><ref bean="drawModel"/></constructor-arg>
 	</bean>
-
+<!--	context-->
 	<bean id="drawContext" class="jdraw.std.StdContext" scope="prototype"
 		init-method="initGUI"
 	>
@@ -17,6 +18,8 @@
 		<property name="width"><value>500</value></property>
 		<property name="height"><value>500</value></property>
 
+<!--	constructor argument im context dinne,
+ liste wo im context zum regristiere brucht wird-->
 		<constructor-arg>
 			<list>	<!-- null represents a separator -->
 
@@ -37,6 +40,7 @@
 	</bean>
 	
 	<bean id="line" class="jdraw.figures.LineToolFactory">
+<!--		setter name und icon-->
 		<property name="name"><value>Line</value></property>
 		<property name="iconName"><value>line.png</value></property>
 	</bean>
@@ -45,7 +49,7 @@
 		<property name="name"><value>Oval</value></property>
 		<property name="iconName"><value>oval.png</value></property>
 	</bean>
-
+<!--neue factory bekannnt machen-->
 	<bean id="swiss" class="jdraw.figures.ernst.SwissCrossToolFactory">
 		<property name="name"><value>Swisscross</value></property>
 		<property name="iconName"><value>swisscross.png</value></property>

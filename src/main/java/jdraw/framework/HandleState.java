@@ -40,4 +40,5 @@ public interface HandleState {
     HandleState swapVertical();
 
     HandleState swapHorizontal();
+
 }

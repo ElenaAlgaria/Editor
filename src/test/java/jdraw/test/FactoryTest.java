@@ -20,13 +20,15 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+//abstrakt demit anderi figure devo erbe chönnt
 public abstract class FactoryTest {
+    // anstatt concrete Figur wie Rect
     private Figure f;
 
-    // factory method
+    // factory method, bruche nur das, dert inne es new XY mache chönnt d concrete figure
     protected abstract Figure createFigure(int x, int y, int width, int height);
 
-
+    // anstatt f = Rect(1,1)
     @BeforeEach
     public void setUp() {
         f = createFigure(1,1,20,10);

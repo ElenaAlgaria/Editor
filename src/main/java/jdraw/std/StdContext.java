@@ -52,6 +52,11 @@ import jdraw.grid.SimpleGrid;
 public class StdContext extends AbstractContext {
 
     private final List<Figure> clipboard;
+    private List<Integer> bra = new ArrayList<>(){{
+        add(1);
+        add(2);
+        add(3);
+    }};
 
     /**
      * Constructs a standard context with a default set of drawing tools.
@@ -315,9 +320,11 @@ public class StdContext extends AbstractContext {
         return fileMenu;
     }
 
+    // factory
     @Override
     protected void doRegisterDrawTools() {
-        //zum alli tools regristiere
+        //zum alli factories tools regristiere, s einte null zeigt ah dass mer separator wönd
+        // au im spring null dinne
       getToolFactories().forEach(f -> addTool((f != null) ? f.createTool(this) : null));
 
     }
